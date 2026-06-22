@@ -503,7 +503,7 @@ const confirmComparable = () => {
   border-radius: 16px;
   box-shadow: var(--shadow-xl);
   overflow: hidden;
-  max-height: 95vh;
+  max-height: 85vh;
   display: flex;
   flex-direction: column;
 }
@@ -514,6 +514,7 @@ const confirmComparable = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 60px; /* Altura fija para el header */
 }
 
 .modal-header h3 {
@@ -545,6 +546,7 @@ const confirmComparable = () => {
   padding: 1.5rem;
   overflow-y: auto;
   flex: 1;
+  max-height: calc(85vh - 60px); /* Garantiza que quepa y haga scroll */
 }
 
 .description {

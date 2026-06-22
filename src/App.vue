@@ -187,17 +187,59 @@ onMounted(async () => {
 });
 
 const loadUF = async () => {
+  // 1. Intentar mindicador.cl directo (oficial/más común)
   try {
     const response = await fetch('https://mindicador.cl/api/uf');
     if (response.ok) {
       const data = await response.json();
       if (data && data.serie && data.serie.length > 0) {
         formData.valorUF = Math.round(data.serie[0].valor);
+        console.log('✅ UF cargada de mindicador.cl:', formData.valorUF);
+        return;
       }
     }
   } catch (error) {
-    console.error('Error al consultar UF diaria, usando fallback:', error);
+    console.warn('⚠️ Falló consulta directa a mindicador.cl, intentando proxy:', error);
   }
+
+  // 2. Intentar mindicador.cl a través de proxy AllOrigins (evita bloqueos de CORS)
+  try {
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    const targetUrl = encodeURIComponent('https://mindicador.cl/api/uf');
+    const response = await fetch(proxyUrl + targetUrl);
+    if (response.ok) {
+      const wrapper = await response.json();
+      const data = JSON.parse(wrapper.contents);
+      if (data && data.serie && data.serie.length > 0) {
+        formData.valorUF = Math.round(data.serie[0].valor);
+        console.log('✅ UF cargada de mindicador.cl via proxy:', formData.valorUF);
+        return;
+      }
+    }
+  } catch (error) {
+    console.warn('⚠️ Falló mindicador.cl via proxy, intentando gael.cl:', error);
+  }
+
+  // 3. Intentar api.gael.cl directo (proveedor alternativo gratuito)
+  try {
+    const response = await fetch('https://api.gael.cl/general/public/uf');
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data.Valor) {
+        const cleanVal = data.Valor.replace(/\./g, '').replace(',', '.');
+        formData.valorUF = Math.round(parseFloat(cleanVal));
+        console.log('✅ UF cargada de api.gael.cl:', formData.valorUF);
+        return;
+      }
+    }
+  } catch (error) {
+    console.warn('⚠️ Falló api.gael.cl, usando estimación según fecha actual:', error);
+  }
+
+  // 4. Fallback de estimación de fecha actual si todo está sin conexión
+  // Junio 2026: UF promedio ronda los 40.800 CLP
+  formData.valorUF = 40800;
+  console.log('ℹ️ Usando UF de fallback local estimada:', formData.valorUF);
 };
 
 // Limpia el formulario completo para una nueva tasación
