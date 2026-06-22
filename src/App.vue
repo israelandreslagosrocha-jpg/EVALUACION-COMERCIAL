@@ -45,82 +45,70 @@
 
       <!-- VISTA NUEVA TASACIÓN -->
       <div v-show="activeTab === 'nueva'" class="app-layout">
-        <!-- FORMULARIO IZQUIERDA -->
-        <div class="workspace-inputs">
-          <!-- 1. Cliente y Propiedad -->
-          <ClientPropertyForm v-model="formData" />
+        <!-- 1. Cliente y Propiedad -->
+        <ClientPropertyForm v-model="formData" />
 
-          <!-- 2. Comparables de Mercado -->
-          <ComparablesManager 
-            :comparables="comparables" 
-            @apply-terrain-value="handleApplyTerrainValue" 
-            @recalculate="triggerAppraisalRecalc"
-          />
+        <!-- 2. Comparables de Mercado -->
+        <ComparablesManager 
+          :comparables="comparables" 
+          @apply-terrain-value="handleApplyTerrainValue" 
+          @recalculate="triggerAppraisalRecalc"
+        />
 
-          <!-- 3. Obras Complementarias -->
-          <ObrasComplementarias 
-            :works="works" 
-            @recalculate="triggerAppraisalRecalc"
-          />
+        <!-- 3. Obras Complementarias -->
+        <ObrasComplementarias 
+          :works="works" 
+          @recalculate="triggerAppraisalRecalc"
+        />
 
-          <!-- Notas y Recomendación -->
-          <div class="panel card animate-fade-in">
-            <h3>4. Consideraciones y Recomendación Final</h3>
-            <div class="form-group mb-3">
-              <label>Agente Tasador / Visador</label>
-              <input type="text" class="form-input" v-model="agentName" placeholder="Ej: Ximena Torres" />
-            </div>
-            <div class="form-group mb-3">
-              <label>Comentarios y Consideraciones Técnicas</label>
-              <textarea 
-                class="form-input" 
-                rows="4" 
-                v-model="comment" 
-                placeholder="Indique las condiciones del mercado, variabilidad de precios del sector, tiempo estimado de venta, etc..."
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label>Recomendación Comercial Directa</label>
-              <textarea 
-                class="form-input warning-input" 
-                rows="3" 
-                v-model="recommendation" 
-                placeholder="Se recomienda promover venta a un valor probable de... para aceptar ofertas de..."
-              ></textarea>
-            </div>
+        <!-- 4. Notas y Recomendación -->
+        <div class="panel card animate-fade-in">
+          <h3>4. Consideraciones y Recomendación Final</h3>
+          <div class="form-group mb-3">
+            <label>Agente Tasador / Visador</label>
+            <input type="text" class="form-input" v-model="agentName" placeholder="Ej: Ximena Torres" />
+          </div>
+          <div class="form-group mb-3">
+            <label>Comentarios y Consideraciones Técnicas</label>
+            <textarea 
+              class="form-input" 
+              rows="4" 
+              v-model="comment" 
+              placeholder="Indique las condiciones del mercado, variabilidad de precios del sector, tiempo estimado de venta, etc..."
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>Recomendación Comercial Directa</label>
+            <textarea 
+              class="form-input warning-input" 
+              rows="3" 
+              v-model="recommendation" 
+              placeholder="Se recomienda promover venta a un valor probable de... para aceptar ofertas de..."
+            ></textarea>
           </div>
         </div>
 
-        <!-- PANEL DE RESULTADOS DERECHA (FIJO / FLOTANTE) -->
-        <div class="workspace-results">
-          <div class="sticky-results">
-            <!-- Barra de Acciones del Proyecto -->
-            <div class="appraisal-actions mb-3">
-              <button class="btn btn-primary w-full justify-center" @click="saveTasacion" :disabled="saving">
-                {{ saving ? 'Guardando...' : '💾 Guardar Tasación' }}
-              </button>
-              <div class="export-actions mt-2">
-                <button class="btn btn-secondary flex-1 justify-center" @click="handleExportPdf">
-                  📄 Exportar PDF
-                </button>
-                <button class="btn btn-secondary flex-1 justify-center" @click="handleExportExcel">
-                  📊 Exportar Excel
-                </button>
-              </div>
-              <button 
-                class="btn btn-sm btn-clear w-full mt-2" 
-                @click="resetAll" 
-                title="Nueva tasación en blanco"
-              >
-                🧹 Limpiar Formulario
-              </button>
-            </div>
+        <!-- 5. Resultados de Tasación en Tiempo Real -->
+        <DashboardResults :results="calculatedResults" />
 
-            <!-- Panel Financiero en Tiempo Real -->
-            <DashboardResults :results="calculatedResults" />
+        <!-- 6. Memoria de Cálculo / Trazabilidad -->
+        <TrazabilidadPanel :trace="calculatedResults.trace" />
 
-            <!-- Memoria de Cálculo -->
-            <TrazabilidadPanel :trace="calculatedResults.trace" class="mt-4" />
+        <!-- 7. Barra de Acciones del Proyecto -->
+        <div class="appraisal-actions card animate-fade-in">
+          <div class="actions-flex">
+            <button class="btn btn-primary" @click="saveTasacion" :disabled="saving">
+              {{ saving ? 'Guardando...' : '💾 Guardar Tasación' }}
+            </button>
+            <button class="btn btn-secondary" @click="handleExportPdf">
+              📄 Exportar PDF
+            </button>
+            <button class="btn btn-secondary" @click="handleExportExcel">
+              📊 Exportar Excel
+            </button>
+            <button class="btn btn-clear" @click="resetAll">
+              🧹 Limpiar Formulario
+            </button>
           </div>
         </div>
       </div>
@@ -589,66 +577,53 @@ const handleExportExcel = () => {
 
 /* Workspace layout */
 .app-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-@media (min-width: 1100px) {
-  .app-layout {
-    grid-template-columns: 1.2fr 1fr;
-  }
-}
-
-.workspace-inputs {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem; /* Muy juntos */
+  gap: 1.5rem;
 }
 
-.workspace-results {
-  position: relative;
-}
-
-.sticky-results {
-  position: static;
-}
-
-@media (min-width: 1100px) {
-  .sticky-results {
-    position: sticky;
-    top: 1.5rem;
-  }
-}
-
-/* Actions */
+/* Actions panel below trace */
 .appraisal-actions {
   background: white;
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  margin-top: 1rem;
 }
 
-.export-actions {
+.actions-flex {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.actions-flex .btn {
+  min-width: 160px;
+}
+
+@media (max-width: 768px) {
+  .actions-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .actions-flex .btn {
+    width: 100%;
+  }
 }
 
 .btn-clear {
   color: var(--text-muted);
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid #CBD5E1;
 }
 .btn-clear:hover {
-  background: #F1F5F9;
+  background: #FFF5F5;
   color: #EF4444;
+  border-color: #FCA5A5;
 }
-
-.w-full { width: 100%; }
-.mt-2 { margin-top: 0.5rem; }
-.mb-3 { margin-bottom: 0.75rem; }
 
 .warning-input {
   border-color: #FCD34D;
