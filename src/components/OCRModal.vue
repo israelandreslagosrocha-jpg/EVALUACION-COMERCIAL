@@ -10,13 +10,13 @@
 
       <div class="modal-body">
         <p class="description">
-          Sube un pantallazo de <strong>Portal Inmobiliario, TOCTOC, Yapo o Mercado Libre</strong>. La IA extraerá los datos automáticamente para evitar digitación manual.
+          Sube un pantallazo de <strong>Portal Inmobiliario, TOCTOC, Yapo o Mercado Libre</strong>. La IA local leerá el texto del pantallazo y extraerá las características físicas y comerciales de inmediato.
         </p>
 
         <!-- Configuración de API Key de Gemini -->
         <div class="api-key-config">
           <details>
-            <summary>Configurar API Key de Gemini (Opcional - Extraer con IA Real)</summary>
+            <summary>🔑 Configurar API Key de Gemini (Opcional - Estructuración Inteligente)</summary>
             <div class="form-group mt-2">
               <label>API Key de Google Gemini</label>
               <div class="api-key-input-wrap">
@@ -31,7 +31,7 @@
                 </button>
               </div>
               <small class="text-muted">
-                Tu clave se almacena localmente en tu navegador. Si no la ingresas, el sistema simulará la extracción para demostración.
+                Si configuras tu API Key, Gemini refinará las direcciones y la descripción técnica extraída por el lector local.
               </small>
             </div>
           </details>
@@ -72,21 +72,20 @@
             <div class="processing-panel">
               <div v-if="loading" class="ocr-loading">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
-                <p>La IA de Gemini está analizando la imagen...</p>
-                <span class="loading-detail">Extrayendo precios, m² y características...</span>
+                <p>{{ progressStatus }}</p>
+                <span class="loading-detail">Procesando píxeles y analizando texto...</span>
               </div>
 
               <!-- Resultados de Extracción -->
               <div v-else-if="extractedData" class="extraction-results">
                 <div class="results-header success-badge">
-                  <span>✓ Extracción completada</span>
-                  <small v-if="!isRealAi">Simulado (Ingresa API Key en el menú de arriba para extracción real)</small>
-                  <small v-else>Realizado por Gemini 2.5 Flash</small>
+                  <span>✓ Datos Leídos Exitosamente</span>
+                  <small>{{ isRealAi ? 'Gemini AI Refined' : 'Motor Local OCR (Tesseract)' }}</small>
                 </div>
 
                 <div class="results-grid">
                   <div class="form-group">
-                    <label>Portal Inmobiliario</label>
+                    <label>Portal Origen</label>
                     <input type="text" class="form-input" v-model="extractedData.portal" />
                   </div>
                   <div class="form-group">
@@ -95,11 +94,11 @@
                   </div>
                   <div class="form-group">
                     <label>m² Terreno</label>
-                    <input type="number" class="form-input" v-model.number="extractedData.superficie_terreno" />
+                    <input type="number" class="form-input highlight" v-model.number="extractedData.superficie_terreno" />
                   </div>
                   <div class="form-group">
                     <label>m² Construidos</label>
-                    <input type="number" class="form-input" v-model.number="extractedData.superficie_construida" />
+                    <input type="number" class="form-input highlight" v-model.number="extractedData.superficie_construida" />
                   </div>
                   <div class="form-group">
                     <label>Dormitorios</label>
@@ -110,7 +109,7 @@
                     <input type="number" class="form-input" v-model.number="extractedData.banos" />
                   </div>
                   <div class="form-group span-all">
-                    <label>Dirección</label>
+                    <label>Dirección Detectada</label>
                     <input type="text" class="form-input" v-model="extractedData.direccion" />
                   </div>
                   <div class="form-group">
@@ -122,7 +121,7 @@
                     <input type="number" class="form-input" v-model.number="extractedData.uf_dia" />
                   </div>
                   <div class="form-group span-all">
-                    <label>Descripción / Observaciones</label>
+                    <label>Resumen / Descripción de la Muestra</label>
                     <textarea class="form-input" rows="2" v-model="extractedData.descripcion"></textarea>
                   </div>
                 </div>
@@ -153,6 +152,7 @@ const isDragging = ref(false);
 const imageSrc = ref(null);
 const fileInput = ref(null);
 const loading = ref(false);
+const progressStatus = ref('Iniciando lector...');
 const extractedData = ref(null);
 const isRealAi = ref(false);
 
@@ -160,10 +160,7 @@ const geminiApiKey = ref('');
 const showApiKey = ref(false);
 
 onMounted(() => {
-  // Cargar clave guardada
   geminiApiKey.value = localStorage.getItem('tasador_gemini_apikey') || '';
-  
-  // Escuchar pegar desde el clipboard
   window.addEventListener('paste', handlePaste);
 });
 
@@ -230,127 +227,247 @@ const resetImage = () => {
   loading.value = false;
 };
 
-// Extracción real usando Gemini API o mock
+// DUAL-ENGINE OCR EXTRACTION: 
+// 1. Run local Tesseract.js (free, offline, extracts raw text)
+// 2. Parse text with Regex (local free fallback)
+// 3. If Gemini API key is configured, send the raw text to Gemini for structured refinement
 const runOcrExtraction = async (base64Image) => {
   loading.value = true;
   isRealAi.value = false;
-  
-  // Obtener valor actual aproximado de UF de la sesión
+  progressStatus.value = 'Lector OCR: Analizando imagen localmente...';
+
   const defaultUf = 39400;
 
-  if (geminiApiKey.value) {
-    try {
-      // Extraemos la parte base64 pura (sin el header data:image/png;base64,)
-      const base64Data = base64Image.split(',')[1];
-      const mimeType = base64Image.split(';')[0].split(':')[1];
+  try {
+    // Verificar si Tesseract está cargado globalmente
+    if (typeof window.Tesseract === 'undefined') {
+      throw new Error('Librería OCR local Tesseract no cargada. Por favor verifica tu conexión a internet.');
+    }
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey.value}`;
-      
-      const prompt = `Analiza este pantallazo de publicación de propiedad inmobiliaria y extrae los datos de forma estructurada en un JSON plano.
-Identifica y extrae:
-1. portal: Portal origen (Portal Inmobiliario, TOCTOC, Yapo, Mercado Libre, etc.)
-2. precio: Valor numérico del precio (ya sea en UF o en CLP, mantén el número original).
-3. superficie_terreno: Superficie total o de terreno (número en m²).
-4. superficie_construida: Superficie útil o construida (número en m²).
-5. dormitorios: Cantidad de dormitorios (entero).
-6. banos: Cantidad de baños (entero).
-7. direccion: Dirección de la propiedad.
-8. comuna: Comuna donde se ubica.
-9. descripcion: Breve descripción de la propiedad.
-10. uf_dia: Coloca ${defaultUf}.
+    // Ejecutar Tesseract OCR en español ('spa')
+    const resultOcr = await window.Tesseract.recognize(base64Image, 'spa', {
+      logger: m => {
+        if (m.status === 'recognizing text') {
+          progressStatus.value = `Lector OCR: Escaneando texto (${Math.round(m.progress * 100)}%)`;
+        }
+      }
+    });
 
-Responde ÚNICAMENTE con un objeto JSON válido que contenga estas llaves. No añadas explicaciones de texto antes o después.
-El formato JSON exacto debe ser:
+    const rawText = resultOcr.data.text;
+    console.log("Texto extraído por Tesseract OCR:", rawText);
+
+    if (!rawText || rawText.trim().length === 0) {
+      throw new Error('No se pudo detectar texto legible en el pantallazo.');
+    }
+
+    // 1. Aplicar análisis local inicial con expresiones regulares
+    let parsedLocal = parseTextWithRegex(rawText, defaultUf);
+
+    // 2. Si hay Gemini API Key configurada, refinar el texto crudo
+    if (geminiApiKey.value) {
+      progressStatus.value = 'IA Gemini: Estructurando y limpiando datos...';
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey.value}`;
+        
+        const prompt = `Analiza este bloque de texto extraído mediante un lector OCR desde una publicación inmobiliaria. 
+Extrae las características de la propiedad y estructúralas estrictamente en un objeto JSON plano en español.
+
+Texto OCR crudo:
+"""
+${rawText}
+"""
+
+El formato del JSON de salida debe ser exactamente el siguiente, no incluyas markdown ni texto extra en tu respuesta, solo el objeto JSON:
 {
-  "portal": "Nombre Portal",
-  "precio": 4500,
-  "superficie_terreno": 300,
-  "superficie_construida": 120,
-  "dormitorios": 3,
-  "banos": 2,
-  "direccion": "Calle Ficticia 123",
-  "comuna": "Santiago",
-  "descripcion": "Detalles extraídos...",
-  "uf_dia": ${defaultUf}
+  "portal": "Identifica si es Portal Inmobiliario, TOCTOC, Yapo, Mercado Libre, etc.",
+  "precio": 4500, // número entero o flotante del precio de la propiedad (si está en pesos o UF).
+  "superficie_terreno": 300, // número en m² de superficie total/terreno.
+  "superficie_construida": 120, // número en m² de superficie útil/construida.
+  "dormitorios": 3, // número entero.
+  "banos": 2, // número entero.
+  "direccion": "Dirección exacta si aparece, sino calle/pasaje/avenida.",
+  "comuna": "Comuna chilena detectada.",
+  "descripcion": "Un resumen ejecutivo técnico y corto de la propiedad extraído de la descripción del texto."
 }`;
 
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                { text: prompt },
-                {
-                  inlineData: {
-                    mimeType: mimeType,
-                    data: base64Data
-                  }
-                }
-              ]
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [{ text: prompt }]
+              }
+            ],
+            generationConfig: {
+              responseMimeType: "application/json"
             }
-          ],
-          generationConfig: {
-            responseMimeType: "application/json"
-          }
-        })
-      });
+          })
+        });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        if (response.ok) {
+          const geminiResult = await response.json();
+          const textResponse = geminiResult.candidates[0].content.parts[0].text;
+          const cleanJsonStr = textResponse.replace(/```json/g, '').replace(/```/g, '').trim();
+          const parsedGemini = JSON.parse(cleanJsonStr);
+
+          // Sincronizar datos refinados por la IA
+          extractedData.value = {
+            portal: parsedGemini.portal || parsedLocal.portal,
+            precio: Number(parsedGemini.precio) || parsedLocal.precio,
+            superficie_terreno: Number(parsedGemini.superficie_terreno) || parsedLocal.superficie_terreno,
+            superficie_construida: Number(parsedGemini.superficie_construida) || parsedLocal.superficie_construida,
+            dormitorios: Number(parsedGemini.dormitorios) || parsedLocal.dormitorios,
+            banos: Number(parsedGemini.banos) || parsedLocal.banos,
+            direccion: parsedGemini.direccion || parsedLocal.direccion,
+            comuna: parsedGemini.comuna || parsedLocal.comuna,
+            descripcion: parsedGemini.descripcion || parsedLocal.descripcion,
+            uf_dia: defaultUf
+          };
+          isRealAi.value = true;
+        } else {
+          throw new Error('Gemini API respondió con error');
+        }
+      } catch (geminiError) {
+        console.warn("Fallo refinamiento Gemini, usando extracción local:", geminiError);
+        extractedData.value = parsedLocal;
       }
-
-      const result = await response.json();
-      const textResponse = result.candidates[0].content.parts[0].text;
-      
-      // Limpiar respuesta en caso de que venga con bloques de markdown ```json
-      const cleanJsonStr = textResponse.replace(/```json/g, '').replace(/```/g, '').trim();
-      const parsed = JSON.parse(cleanJsonStr);
-      
-      extractedData.value = {
-        portal: parsed.portal || 'Portal Inmobiliario',
-        precio: Number(parsed.precio) || 4500,
-        superficie_terreno: Number(parsed.superficie_terreno) || 200,
-        superficie_construida: Number(parsed.superficie_construida) || 100,
-        dormitorios: Number(parsed.dormitorios) || 3,
-        banos: Number(parsed.banos) || 2,
-        direccion: parsed.direccion || 'Dirección no especificada',
-        comuna: parsed.comuna || 'Valparaíso',
-        descripcion: parsed.descripcion || '',
-        uf_dia: Number(parsed.uf_dia) || defaultUf
-      };
-      isRealAi.value = true;
-    } catch (error) {
-      console.error("Error llamando a la API de Gemini:", error);
-      alert("Error al conectar con la API de Gemini. Se cargará una simulación de extracción.");
-      loadMockData(defaultUf);
-    } finally {
-      loading.value = false;
+    } else {
+      // Usar directamente los datos extraídos localmente por Tesseract + Regex
+      extractedData.value = parsedLocal;
     }
-  } else {
-    // Simulación de OCR (Mock)
-    setTimeout(() => {
-      loadMockData(defaultUf);
-      loading.value = false;
-    }, 2000);
+
+  } catch (error) {
+    console.error("Error en flujo de extracción OCR:", error);
+    alert(`Error de lectura: ${error.message || error}. Se cargarán datos semilla de prueba.`);
+    loadMockData(defaultUf);
+  } finally {
+    loading.value = false;
   }
 };
 
+// Extractor local basado en Expresiones Regulares
+const parseTextWithRegex = (text, defaultUf) => {
+  const data = {
+    portal: 'Portal Inmobiliario',
+    precio: 0,
+    superficie_terreno: 0,
+    superficie_construida: 0,
+    dormitorios: 0,
+    banos: 0,
+    direccion: 'Dirección no especificada',
+    comuna: 'Teodoro Schmidt', // Default en base al cuadrante
+    descripcion: '',
+    uf_dia: defaultUf
+  };
+
+  // Reemplazar saltos de línea con espacios para búsquedas regex horizontales
+  const singleLineText = text.replace(/\s+/g, ' ');
+
+  // 1. Detectar Origen / Portal
+  if (/toctoc/i.test(text)) data.portal = 'TOCTOC';
+  else if (/yapo/i.test(text)) data.portal = 'Yapo';
+  else if (/mercado\s*libre/i.test(text)) data.portal = 'Mercado Libre';
+
+  // 2. Extraer Precio (UF o CLP)
+  // UF 2.206 o 1.666,73 UF
+  const ufRegex = /UF\s*([\d\.,]+)/i;
+  const ufRegexRev = /([\d\.,]+)\s*UF/i;
+  const clpRegex = /(?:\$|CLP)\s*([\d\.,]+)/i;
+
+  const ufMatch = text.match(ufRegex) || text.match(ufRegexRev);
+  if (ufMatch) {
+    // Si contiene una coma y un punto, o solo puntos
+    const cleanPrice = ufMatch[1].replace(/\./g, '').replace(',', '.');
+    const val = parseFloat(cleanPrice);
+    if (!isNaN(val)) data.precio = val;
+  } else {
+    const clpMatch = text.match(clpRegex);
+    if (clpMatch) {
+      const cleanPrice = clpMatch[1].replace(/\./g, '').replace(',', '.');
+      const val = parseFloat(cleanPrice);
+      if (!isNaN(val)) {
+        // Si es mayor a 100.000, asumimos CLP y lo convertimos a UF
+        if (val > 100000) {
+          data.precio = Math.round(val / defaultUf);
+        } else {
+          data.precio = val;
+        }
+      }
+    }
+  }
+
+  // 3. Extraer Metraje Terreno
+  // "Superficie: 250.00 m²", "terreno de 180 m²", "superficie del terreno 250 m²"
+  const terrenoRegex = /(?:superficie|terreno|total)[^\d]*([\d\.,]+)\s*(?:m²|m2|metros)/i;
+  const terrMatch = singleLineText.match(terrenoRegex);
+  if (terrMatch) {
+    const val = parseFloat(terrMatch[1].replace(/\./g, '').replace(',', '.'));
+    if (!isNaN(val)) data.superficie_terreno = val;
+  }
+
+  // 4. Extraer Metraje Construido
+  // "Construidos: 85.00 m²", "109 m² construidos"
+  const constRegex = /(?:construidos|util|útil|útiles)[^\d]*([\d\.,]+)\s*(?:m²|m2|metros)/i;
+  const constMatch = singleLineText.match(constRegex);
+  if (constMatch) {
+    const val = parseFloat(constMatch[1].replace(/\./g, '').replace(',', '.'));
+    if (!isNaN(val)) data.superficie_construida = val;
+  }
+
+  // 5. Dormitorios y Baños
+  // "Dormitorios: 3" o "4 dormitorios"
+  const dormRegex = /(\d+)\s*(?:dormitorio|habitacio)/i;
+  const dormRegexRev = /(?:dormitorios|habitaciones)[^\d]*(\d+)/i;
+  const dMatch = singleLineText.match(dormRegex) || singleLineText.match(dormRegexRev);
+  if (dMatch) {
+    data.dormitorios = parseInt(dMatch[1]);
+  }
+
+  // "Baños: 2" o "1 baño"
+  const banoRegex = /(\d+)\s*(?:baño|bano)/i;
+  const banoRegexRev = /(?:baños|banos)[^\d]*(\d+)/i;
+  const bMatch = singleLineText.match(banoRegex) || singleLineText.match(banoRegexRev);
+  if (bMatch) {
+    data.banos = parseInt(bMatch[1]);
+  }
+
+  // 6. Buscar Comuna Común
+  const comunas = ['Teodoro Schmidt', 'Curicó', 'Valparaíso', 'Santiago', 'Viña del Mar', 'Temuco', 'Concepción'];
+  for (const c of comunas) {
+    if (new RegExp(c, 'i').test(text)) {
+      data.comuna = c;
+      break;
+    }
+  }
+
+  // 7. Extraer Dirección (Patrón: Nombre Calle + Número)
+  // ej: "Manuel Rodríguez N.º 373" o "San José de la Dehesa 0240"
+  const addressRegex = /([A-Z][a-záéíóúñ]+(?:\s+[A-Za-z][a-záéíóúñ]+)*)\s+(?:N[.°º#]|\bNo\b)?\s*(\d{2,5})/i;
+  const addMatch = singleLineText.match(addressRegex);
+  if (addMatch) {
+    data.direccion = addMatch[0];
+  }
+
+  // Crear una descripción limpia basada en el texto leído
+  data.descripcion = text.substring(0, 250).trim() + '...';
+
+  return data;
+};
+
 const loadMockData = (defaultUf) => {
-  // Simulador inteligente que devuelve datos realistas basados en un comparable de PortalInmobiliario
   extractedData.value = {
     portal: 'Portal Inmobiliario',
-    precio: 3500, // en UF
-    superficie_terreno: 300,
-    superficie_construida: 120,
+    precio: 2206,
+    superficie_terreno: 250,
+    superficie_construida: 85,
     dormitorios: 3,
     banos: 2,
-    direccion: 'Av. Alemania 1420',
-    comuna: 'Valparaíso',
-    descripcion: 'Excelente propiedad ubicada en sector consolidado de Cerro Alegre, hermosa vista, movilización a la puerta.',
+    direccion: 'Manuel Rodríguez N.º 373',
+    comuna: 'Teodoro Schmidt',
+    descripcion: 'Casa nueva con excelentes terminaciones, ubicada en sector de Teodoro Schmidt, Araucanía. Terreno de 250 m² y construcción de 85 m².',
     uf_dia: defaultUf
   };
 };
@@ -386,7 +503,7 @@ const confirmComparable = () => {
   border-radius: 16px;
   box-shadow: var(--shadow-xl);
   overflow: hidden;
-  max-height: 90vh;
+  max-height: 95vh;
   display: flex;
   flex-direction: column;
 }
