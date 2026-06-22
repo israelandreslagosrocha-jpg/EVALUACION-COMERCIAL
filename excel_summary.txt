@@ -1,0 +1,120 @@
+
+=== File: ./src/assets/F15-Formato Evaluación Comercial Casas 4.0.xlsm ===
+Sheets: Evaluacion Comercial GP, Anexos, Analisis Mercado, Hoja2, Fotos propiedad, CHORNIK, Hoja1
+
+--- Sheet: Evaluacion Comercial GP ---
+Row 1: EVALUACIÓN COMERCIAL
+Row 4: Propietario(a): | nelson lecaro
+Row 5: Fecha dd/mm/aaaa: | 1/3/60 |  |  |  |  |  | Antigüedad Real: | 65
+Row 6: Dirección: | rosario1356 |  |  |  |  |  | Antigüedad Aparente: | 30
+Row 7: Comuna: | curico |  |  |  |  |  | ROL SII: | 00321-00042
+Row 8: Agente Inmobiliario / Visador: | ximena torres
+Row 10:  | Clase | Calidad | Edad | m2 /cant | Máximo |  Total UF | Mínimo | Total UF
+Row 11: Terreno |  |  | 65 | 259 | UF 1.19 | UF 308 | UF 1.13 | UF 293
+Row 12: Construcción Original 1er pisos | F | 3 | 65 | 103 | UF 0.46 | UF 48 | UF 0.44 | UF 45
+Row 13: Construción Original 2do piso |  |  |  |  | UF 0.00 | UF 0 | UF 0.00 | UF 0
+Row 14: Mansarda |  |  |  |  | UF 0.00 | UF 0 | UF 0.00 | UF 0
+Row 15:  |  |  |  |  | UF 200.00 | UF 0 | UF 190.00 | UF 0
+Row 16: TOTAL UF |  |  |  |  | UF 1.65 | UF 356 |  | UF 338
+Row 17: Valor UF  | $38,477 |  |  |  |  | $ 13,689,963 |  | $ 13,005,465
+Row 19: Valor Arriendo  |  |  | Rentabilidad Anual |  |  | Canon Máximo |  | Canon Mínimo
+Row 20: Estimado |  |  |  | 4.00% |  | $ 45,633 |  | $ 43,352
+Row 21:  |  |  |  | 4.50% |  | $ 51,337 |  | $ 48,770
+Row 22:  |  |  |  | 5.00% |  | $ 57,042 |  | $ 54,189
+Row 23:  |  |  |  | 94.00% |  | $ 1,072,380 |  | $ 1,018,761
+Row 24:  |  |  |  | 6.00% |  | $ 68,450 |  | $ 65,027
+Row 25:  |  |  |  | 6.50% |  | $ 74,154 |  | $ 70,446
+Row 27: Comentarios y 
+consideraciones | Para el análisis, se consideran los metrajes originales de las construcciones, metraje oficial validado en  Municipalidad y el  servicio de impuestos internos. Propiedad supuestamente con ampliaciones regularizadas. Se considera principalmente la oferta de propiedades en el sector, de similares caracteristicas, respecto a distribución, calidad y uso de suelo. Hay muchas propiedades disponibles  en los alrededores de la estudiada, considerada competencia.  La oferta de propiedades usadas está en 14 UF el mt2 construido depreciado en promedio, donde el valor de metro cuadrado de terreno, de las últimas ventas en el sector es de 20 UF mt2. . Las propiedades de la muestra tienen más de 2 meses en venta, por lo que el precio de publicación se sabe que no es el precio de venta, siendo este último un 5% más bajo.  Se recomienda segunda o tercera  opinión de tasación particular o de corredores contratados actualemente. La comuna de Valparaiso posee 329 propiedades usadas en venta considerada alta oferta y distorsión de precios, pero los compradores que concretan están con muy conocedores.
+Row 30: Recomendación comercial | Se recomienda promover venta a precio de mercado en 3,350 UF para aceptar oferta entorno  de UF 3,200.-, en primera instancia,. Un valor más alto, deja fuera de mercado la propiedad dificultando su venta, considerando la gran oferta de propiedades usadas (ver anexo  con 15 publicaciones en el cuadrante de las muestras).  El tiempo promedio de venta al valor propuesto es de 1 a 3 meses, más 2 a 3 meses de trámites postventa. Es importante considerar que un precio mayor, no es directamente proporcional al tiempo promedio de venta. Para esta propiedad no se puede sobrepasar la barrera psicológica y de filtros de las 100 millones, alejandose. Para validar el precio obtenido y recomendado, se valida con método de capitalización de renta, que confirma que el arriendo a obtener no será superior a los 450.000 pesos, lo que esta relacionado con el precio de mercado propuesto. Las últimas tasaciones bancarias que hemos gestionado, validan también el precio obtenido en este análisis. En cualquier caso, hay que hacer un relanzamiento del plan de marketing, desde cero, para tener una mayor probabilidad. Dicho plan de marketing, también debe ser adaptado dependiendo si el precio de lanzamiento es de mercado o no. Es poco recomendable implementar todo el plan cuando hay un sobre precio y se recomienda una tasación bancaria para mayor seguridad de los propietarios.
+Row 32:  |  |  |  |  |  |  | Valor publicación | Ofertas hasta
+Row 33:                           Señores, el precio por nuestra propiedad es de 
+Row 34: Nota importante: La presente información es una opinión comercial para promocionar una eventual venta y no 
+Row 35:                               representa una tasación formal para uso bancario. El análisis tiene un margen de error de +-5%
+
+--- Sheet: Anexos ---
+Row 1: ANEXO FOTOGRÁFICO Y ANTECEDENTES
+Row 2:  |  |  |  |  |  |  |  |  |  |  |  | Mapa cant de propiedades en venta 
+
+--- Sheet: Analisis Mercado ---
+Row 1:  |  | ANÁLISIS DE MERCADO Y MUESTREO
+Row 4:  |  | Cuadrante/Sector :   |  | Lo Errazuriz - Av. Pedro Aguirre Cerda - Divino Maestro - El Mirador
+Row 7: Análisis de Oferta nueva, usada, últimas vendidas y tasaciones. Al menos 6 muestras usadas publicadas competencia real.
+Row 9:  |  |  | Superficies
+Row 10: Referencia | Cod Portal | Valor         Venta UF | m2    construído | m2        terreno | Clase | Calidad | Edad Apar. | UF      Const. | Terreno      UF | Valor Const      UF/m2 | Ubicación/Dirección/Referencia
+Row 11: Ref. 01 | 132434 |  5,610  | 130 | 311 | C | 3 | 70 |  331.76  | 16.97  | 2.55 | Calle Castelar, cerro Barón
+Row 12: Ref. 02 | 1555824023 |  6,512  | 133 | 321 | E | 3 | 70 |  57.06  | 20.11  | 0.43 | Bellavista Juan Urzua y Nueva Dardignac
+Row 13: Ref. 03 | 1531473461 |  4,894  | 150 | 160 | C | 3 | 70 |  382.80  | 28.20  | 2.55 | Cerro Ramaditas
+Row 14: Ref. 04 | 2803419286 |  3,254  | 197 | 250 | E | 3 | 70 |  84.51  | 12.68  | 0.43 | Santos Ossa, Valparaíso, Valparaíso
+Row 15: Ref. 04 | 1557435125 |  2,864  | 268 | 347 | E | 3 | 70 |  114.97  | 7.92  | 0.43 | Cerro Barón
+Row 16: Ref. 05 |  |  |  |  |  |  |  |  -    | 0.00  | 0.00
+Row 17: Ref. 06 |  |  |  |  |  |  |  |  -    | 0.00  | 0.00
+Row 18: Ref. 07 |  |  |  |  |  |  |  |  -    | 0.00  | 0.00
+Row 19: Ref. 08 |  |  |  |  |  |  |  |  -    | 0.00  | 0.00
+Row 20: Ref. 09 |  |  |  |  |  |  |  |  -    | 0.00  | 0.00
+Row 21: Ref. 10 |  |  |  |  |  |  |  |  -    | 0.00  | 0.00
+Row 23: En Estudio | Propiedad |  6,508  | 210 | 94 | F | 3 | 30 |  693.0  | 61.86  | 3.30 | Cerro Barón
+Row 25:  | PROMEDIOS | 4,626.80 | 175.60 | 277.80 |  |  |  |  | 17.18 | 1.28
+Row 29: Fecha: | 4/14/25 |  |  |  | VALOR UF PROMEDIO m2 Terreno  |  |  |  |  |  | 17.18
+Row 30: Agente: | ximena torres |  |  |  | VALOR UF PROMEDIO m2 Construído Depreciado |  |  |  |  |  |  1.28 
+Row 31: Valor UF: | 38,477.00
+Row 32: Referencias distintos portales inmobiliarios y letreros en terreno
+
+--- Sheet: Hoja2 ---
+
+--- Sheet: Fotos propiedad ---
+Row 1: ANEXO FOTOGRÁFICO Y ANTECEDENTES
+Row 3:  |  |  |  | Certificado de avaluo
+Row 4:  |  |  |  | Foto de la fachada
+
+--- Sheet: CHORNIK ---
+Row 1: CUADRO DE DEPRECIACIÓN DE “CHORNIK” 
+Row 2: CLASE/EDAD | 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 |  |  |  |  |  |  |  |  |  |  |  | Valor UF $27.556,90
+Row 3: A | 100% | 90% | 82% | 66% | 54% | 44% | 38% | 30%
+Row 4: B | 100% | 92% | 73% | 54% | 40% | 29% | 21% | 16%
+Row 5: C | 100% | 90% | 66% | 44% | 29% | 19% | 13% | 8%
+Row 6: D | 100% | 75% | 60% | 37% | 22% | 13% | 7% | 4%
+Row 7: E | 100% | 70% | 54% | 29% | 15% | 8% | 4% | 3% |  |  |  |  |  |  |  |  |  |  |  |  | Valor UF $27.639,18
+Row 8: F | 100% | 70% | 50% | 25% | 20% | 12% | 4% | 3% |  |  |  |  |  |  |  |  |  |  |  |  | Actualizado al Jueves 25 de Abril de 2019
+Row 9: G | 100% | 90% | 66% | 44% | 29% | 19% | 4% | 3% |  |  |  |  |  |  |  |  |  |  |  |  | << UF Ayer Valor UF Abril 2019 UF Mañana >>
+Row 10: H | 100% | 87% | 60% | 40% | 27% | 17% | 4% | 3% |  |  |  |  |  |  |  |  |  |  |  |  | Tabla año 2019 Valores Históricos
+Row 11: I | 100% | 90% | 66% | 44% | 29% | 19% | 4% | 3%
+Row 12:  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Modo navegación
+Row 13: CALIFICACIÓN | 1 | 2 | 3 | 4 | 5 |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Valor UF Hoy
+Row 14: A |  57  |  52  |  40  |  -  |  -  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Valor UF por año
+Row 15: B |  64  |  54  |  41  |  -  |  -  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ¿Qué es la UF?
+Row 16: C |  47  |  39  |  32  |  26  |  15  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Valor del dólar ahora
+Row 17: D |  36  |  30  |  24  |  19  |  11  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Calculadora, Convertir Unidad de Fomento a Pesos
+Row 18: E |  29  |  24  |  14  |  -  |  -  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Al 25 de Abril de 2019
+Row 19: F |  13  |  13  |  13  |  13  |  13  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | UF
+Row 20: G |  40  |  34  |  28  |  21  |  18  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Unidades de Fomento (UF)
+Row 21: H |  34  |  29  |  19  |  12  |  10  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Pesos (CLP)
+Row 22: I |  36  |  32  |  25  |  19  |  14  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 0.18
+Row 24: CLASE |  | CALIDAD DE CONSTRUCCION |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Convertir Pesos a Unidad de Fomento
+Row 25: A |  Construcción con estructura soporte de acero  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | UF
+Row 26: B |  Estructura soportante de Hormigón Armado  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Pesos
+Row 27: C |  Pilares y cadenas de hormigón armado con muros de albañilería de ladrillos  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Unidades de Fomento ( UF )
+Row 28: D |  Construcción de albañilería de ladrillos y/o piedras  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | 0
+Row 29: E |  Estructura de madera
+Row 30: F |  Estructura de adobe y madera  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Buscar UF por Fecha:  
+Row 31: G |  Construcciones prefabricadas con estructura metálica, paneles de madera prefabricados de hormigón, yeso cartón o similares
+Row 32: H |  Construcción prefabricada en madera, paneles de madera, yeso cartón, fibrocemento o similares |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ¿Qué es la UF?
+Row 33: I |  Construcciones de placas o paneles prefabricados.  Paneles de hormigón liviano. Fibrocemento o paneles de propileno entre mallas de acero para recibir mortero proyectado |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | La UF o Unidad de Fomento, es una unidad financiera cuyo valor se reajusta díariamente según una fórmula basada en el IPC.
+Row 35:  |      CALIDAD |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | Valor UF Hoy | Valor del dólar
+Row 36: 1 | Superior o Lujo
+Row 37: 2 | Buena o Media-Superior
+Row 38: 3 | Corriente o Media (la más usual)
+Row 39: 4 |  Regular o Media-Inferior
+Row 40: 5 | Inferior
+
+--- Sheet: Hoja1 ---
+Row 1: CLASE/AÑOS | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 | 64 | 65 | 66 | 67 | 68 | 69 | 70
+Row 2: A | 100% | 100% | 99% | 98% | 96% | 95% | 95% | 94% | 93% | 91% | 90% | 90% | 89% | 88% | 87% | 86% | 86% | 85% | 84% | 83% | 82% | 82% | 80% | 78% | 76% | 74% | 74% | 72% | 70% | 68% | 66% | 66% | 65% | 63% | 62% | 60% | 60% | 59% | 57% | 56% | 54% | 54% | 53% | 52% | 50% | 49% | 49% | 48% | 47% | 45% | 44% | 44% | 43% | 43% | 42% | 41% | 41% | 40% | 40% | 39% | 38% | 38% | 37% | 36% | 35% | 34% | 34% | 33% | 32% | 31% | 30%
+Row 3: B | 100% | 100% | 99% | 98% | 97% | 96% | 96% | 95% | 94% | 93% | 92% | 92% | 90% | 87% | 85% | 83% | 83% | 80% | 78% | 75% | 73% | 73% | 71% | 68% | 66% | 64% | 64% | 61% | 59% | 56% | 54% | 54% | 52% | 51% | 49% | 47% | 47% | 45% | 44% | 42% | 40% | 40% | 39% | 37% | 36% | 35% | 35% | 33% | 32% | 30% | 29% | 29% | 28% | 27% | 26% | 25% | 25% | 24% | 23% | 22% | 21% | 21% | 20% | 20% | 19% | 19% | 19% | 18% | 17% | 17% | 16%
+Row 4: C | 100% | 100% | 99% | 98% | 96% | 95% | 95% | 94% | 93% | 91% | 90% | 90% | 87% | 84% | 81% | 78% | 78% | 75% | 72% | 69% | 66% | 66% | 63% | 61% | 58% | 55% | 55% | 52% | 50% | 47% | 44% | 44% | 42% | 40% | 38% | 37% | 37% | 35% | 33% | 31% | 29% | 29% | 28% | 27% | 25% | 24% | 24% | 23% | 22% | 20% | 19% | 19% | 18% | 18% | 17% | 16% | 16% | 15% | 15% | 14% | 13% | 13% | 12% | 12% | 11% | 11% | 11% | 10% | 9% | 9% | 8%
+Row 5: D | 100% | 100% | 97% | 94% | 91% | 88% | 88% | 84% | 81% | 78% | 75% | 75% | 73% | 71% | 69% | 68% | 68% | 66% | 64% | 62% | 60% | 60% | 57% | 54% | 51% | 49% | 49% | 46% | 43% | 40% | 37% | 37% | 35% | 33% | 31% | 30% | 30% | 28% | 26% | 24% | 22% | 22% | 21% | 20% | 19% | 18% | 18% | 16% | 15% | 14% | 13% | 13% | 12% | 12% | 11% | 10% | 10% | 9% | 9% | 8% | 7% | 7% | 7% | 6% | 6% | 6% | 6% | 5% | 5% | 4% | 4%
+Row 6: E | 100% | 100% | 96% | 93% | 89% | 85% | 85% | 81% | 77% | 74% | 70% | 70% | 68% | 66% | 64% | 62% | 62% | 60% | 58% | 56% | 54% | 54% | 51% | 48% | 45% | 42% | 42% | 38% | 35% | 32% | 29% | 29% | 27% | 26% | 24% | 22% | 22% | 20% | 19% | 17% | 15% | 15% | 14% | 13% | 12% | 12% | 12% | 11% | 10% | 9% | 8% | 8% | 8% | 7% | 7% | 6% | 6% | 6% | 5% | 5% | 4% | 4% | 4% | 4% | 4% | 4% | 4% | 3% | 3% | 3% | 3%
+Row 7: F | 100% | 100% | 96% | 93% | 89% | 85% | 85% | 81% | 77% | 74% | 70% | 70% | 68% | 65% | 63% | 60% | 60% | 57% | 55% | 53% | 50% | 50% | 47% | 44% | 41% | 38% | 38% | 34% | 31% | 28% | 25% | 25% | 24% | 24% | 23% | 23% | 23% | 22% | 21% | 21% | 20% | 20% | 19% | 18% | 17% | 16% | 16% | 15% | 14% | 13% | 12% | 12% | 11% | 10% | 9% | 8% | 8% | 7% | 6% | 5% | 4% | 4% | 4% | 4% | 4% | 4% | 4% | 3% | 3% | 3% | 3%
+Row 8: G | 100% | 100% | 99% | 98% | 96% | 95% | 95% | 94% | 93% | 91% | 90% | 90% | 87% | 84% | 81% | 78% | 78% | 75% | 72% | 69% | 66% | 66% | 63% | 61% | 58% | 55% | 55% | 52% | 50% | 47% | 44% | 44% | 42% | 40% | 38% | 37% | 37% | 35% | 33% | 31% | 29% | 29% | 28% | 27% | 25% | 24% | 24% | 23% | 22% | 20% | 19% | 19% | 17% | 15% | 13% | 12% | 12% | 10% | 8% | 6% | 4% | 4% | 4% | 4% | 4% | 4% | 4% | 3% | 3% | 3% | 3%
+Row 9: H | 100% | 100% | 98% | 97% | 95% | 94% | 94% | 92% | 90% | 89% | 87% | 87% | 84% | 80% | 77% | 74% | 74% | 70% | 67% | 63% | 60% | 60% | 57% | 55% | 53% | 50% | 50% | 48% | 45% | 43% | 40% | 40% | 38% | 37% | 35% | 34% | 34% | 32% | 30% | 29% | 27% | 27% | 26% | 25% | 23% | 22% | 22% | 21% | 20% | 18% | 17% | 17% | 15% | 14% | 12% | 11% | 11% | 9% | 7% | 6% | 4% | 4% | 4% | 4% | 4% | 4% | 4% | 3% | 3% | 3% | 3%
+Row 10: I | 100% | 100% | 99% | 98% | 96% | 95% | 95% | 94% | 93% | 91% | 90% | 90% | 87% | 84% | 81% | 78% | 78% | 75% | 72% | 69% | 66% | 66% | 63% | 61% | 58% | 55% | 55% | 52% | 50% | 47% | 44% | 44% | 42% | 40% | 38% | 37% | 37% | 35% | 33% | 31% | 29% | 29% | 28% | 27% | 25% | 24% | 24% | 23% | 22% | 20% | 19% | 19% | 17% | 15% | 13% | 12% | 12% | 10% | 8% | 6% | 4% | 4% | 4% | 4% | 4% | 4% | 4% | 3% | 3% | 3% | 3%
